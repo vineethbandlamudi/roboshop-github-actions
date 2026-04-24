@@ -1,16 +1,24 @@
 name: Demo Pipeline
-on:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 jobs:
-  Demo:
+  Build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Run a one-line script
-        run: echo Hello, world!
-        
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - run: echo "Build"
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test"
+
+  DEV:
+    environment: DEV
+    runs-on: windows-latest
+    steps:
+      - run: echo "Dev Env"
+
+  QA:
+    environment: QA
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "QA Env"
