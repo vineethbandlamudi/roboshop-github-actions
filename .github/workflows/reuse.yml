@@ -2,4 +2,4 @@ name: Reusable Demo
 on: workflow_dispatch
 jobs:
   Test:
-    uses: vineethbandlamudi/learn-github-actions/.github/workflows/pipeline.yml@v1
+    uses: vineethbandlamudi/learn-github-actions/.github/workflows/pipeline.yml@main
