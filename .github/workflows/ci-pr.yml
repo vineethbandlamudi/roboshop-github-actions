@@ -1,0 +1,12 @@
+name: CI - PR
+on: [pull_request]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build"
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test"
