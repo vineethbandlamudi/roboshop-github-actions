@@ -5,18 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Build"
-
   Test:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Test"
-
   DEV:
     environment: DEV
     runs-on: windows-latest
     steps:
       - run: echo "Dev Env"
-
   QA:
     environment: QA
     runs-on: ubuntu-latest
