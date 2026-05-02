@@ -6,15 +6,18 @@ jobs:
     steps:
       - run: echo "Build"
   Test:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - run: echo "Test"
   DEV:
+    needs: Test
     environment: DEV
     runs-on: windows-latest
     steps:
       - run: echo "Dev Env"
   QA:
+    needs: DEV
     environment: QA
     runs-on: ubuntu-latest
     steps:

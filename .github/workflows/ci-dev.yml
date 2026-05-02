@@ -1,7 +1,19 @@
 name: CI ReUse - Dev
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      appType:
+        required: true
+        type: string
 jobs:
-  Build:
+  NodeJS_Build:
+    if: inputs.appType == 'nodejs'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build"
+
+  Maven_Build:
+    if: inputs.appType == 'maven'
     runs-on: ubuntu-latest
     steps:
       - run: echo "Build"
