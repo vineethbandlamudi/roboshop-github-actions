@@ -9,7 +9,7 @@ jobs:
   Build:
     uses: vineethbandlamudi/roboshop-github-actions/.github/workflows/build.yml@main
     with:
-      appType: '{{ inputs.appType }}'
+      appType: '${{ inputs.appType }}'
   Test:
     needs: Build
     runs-on: ubuntu-latest
