@@ -5,20 +5,29 @@ on:
       appType:
         required: true
         type: string
+      dockerBuild:
+        required: true
+        type: string
 jobs:
   Build:
     uses: vineethbandlamudi/roboshop-github-actions/.github/workflows/build.yml@main
     with:
       appType: '${{ inputs.appType }}'
+      dockerBuild: 'false'
   Test:
     needs: Build
     runs-on: ubuntu-latest
     steps:
       - run: echo "Test"
+  DockerBuild:
+    uses: vineethbandlamudi/roboshop-github-actions/.github/workflows/build.yml@main
+    with:
+      appType: '${{ inputs.appType }}'
+      dockerBuild: 'true'
   DEV:
     needs: Test
     environment: DEV
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Dev Env"
   QA:

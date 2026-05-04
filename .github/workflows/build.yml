@@ -5,13 +5,20 @@ on:
       appType:
         required: true
         type: string
+      dockerBuild:
+        required: true
+        type: string
 jobs:
   NodeJS_Build:
     if: inputs.appType == 'nodejs'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm install
+      - name: Install Dependencies
+        run: npm install
+      - name: Docker Build
+        if: inputs.dockerBuild == 'true'
+        run: docker build .
 
   Maven_Build:
     if: inputs.appType == 'maven'
