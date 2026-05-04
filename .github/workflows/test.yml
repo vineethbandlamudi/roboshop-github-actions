@@ -1,4 +1,4 @@
-name: CI ReUse - Build
+name: CI ReUse - Test Cases
 on:
   workflow_call:
     inputs:
@@ -6,14 +6,14 @@ on:
         required: true
         type: string
 jobs:
-  NodeJS_Build:
+  NodeJS_Test:
     if: inputs.appType == 'nodejs'
     runs-on: ubuntu-latest
     steps:
-      - run: npm install
+      - run: echo "Test NodeJS"
 
-  Maven_Build:
+  Maven_Test:
     if: inputs.appType == 'maven'
     runs-on: ubuntu-latest
     steps:
-      - run: mvn package
+      - run: echo "Test Maven"
