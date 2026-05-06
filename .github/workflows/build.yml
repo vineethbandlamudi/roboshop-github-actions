@@ -26,7 +26,7 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           TENANT_ID: ${{ vars.TENANT_ID }}
         run: |
-          az login --service-principal  --username "${CLIENT_ID}" --password "${CLIENT_SECRET}" --tenant "${TENANT_ID}"
+          az login --service-principal  --username $CLIENT_ID --password $CLIENT_SECRET --tenant $TENANT_ID
           az acr login --name roboshopacr
           docker build -t roboshopacr.azureacr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} .
   Maven_Build:
