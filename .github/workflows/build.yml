@@ -19,16 +19,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Install Dependencies
-        run: npm install
-      - name: Azure Login action
+        run: echo npm install
+
+      - name: Azure Login
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          enable-AzPSSession: true
-      - name: Run Azure CLI commands
-        run: |
-          az account show
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
 
+      - name: Login to ACR
+        run: az acr login --name roboshopacr
 #      - name: Docker Build
 #        if: inputs.dockerBuild == 'true'
 #        env:
