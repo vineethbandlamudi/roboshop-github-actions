@@ -21,29 +21,16 @@ jobs:
       - name: Install Dependencies
         run: echo npm install
 
-      - name: Azure Login
-        uses: azure/login@v2
-        creds: |
-          {
-            "clientId": "${{ secrets.CLIENT_ID }}",
-            "clientSecret": "${{ secrets.CLIENT_SECRET }}",
-            "subscriptionId": "${{ secrets.SUBSCRIPTION_ID }}",
-            "tenantId": "${{ vars.TENANT_ID }}"
-          }
-
-
-      - name: Login to ACR
-        run: az acr login --name roboshopacr
-#      - name: Docker Build
-#        if: inputs.dockerBuild == 'true'
-#        env:
-#          CLIENT_ID : ${{ secrets.CLIENT_ID }}
-#          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-#          TENANT_ID: ${{ vars.TENANT_ID }}
-#        run: |
-#          az login --service-principal  --username $CLIENT_ID --password $CLIENT_SECRET --tenant $TENANT_ID
-#          az acr login --name roboshopacr
-#          docker build -t roboshopacr.azureacr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} .
+      - name: Docker Build
+        if: inputs.dockerBuild == 'true'
+        env:
+          CLIENT_ID : ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          TENANT_ID: ${{ vars.TENANT_ID }}
+        run: |
+          az login --service-principal  --username '${CLIENT_ID}' --password '${CLIENT_SECRET}' --tenant '${TENANT_ID}'
+          az acr login --name roboshopacr
+          docker build -t roboshopacr.azureacr.io/roboshop-${{ inputs.appName }}:${{ github.sha }} .
   Maven_Build:
     if: inputs.appType == 'maven'
     runs-on: ubuntu-latest
